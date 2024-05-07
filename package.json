@@ -1,0 +1,26 @@
+{
+  "name": "assist-2024",
+  "version": "1.0.0",
+  "description": "The assist part of website-2024 and server-2024",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "test": "node commands/test.mjs"
+  },
+  "author": "kuankuan",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.10.1",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/mysql": "^2.15.26",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.3"
+  },
+  "files": [
+    "src"
+  ]
+}
