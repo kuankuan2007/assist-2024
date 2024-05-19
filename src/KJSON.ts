@@ -72,7 +72,7 @@ const specialValues: {
     },
   },
 ];
-export function parse(data: string): unknown {
+export function parse(data: string): object {
   function dfsTransform(target: unknown, dataList: unknown[]): unknown {
     if (target instanceof Object) {
       for (const i in target) {
@@ -112,7 +112,7 @@ export function parse(data: string): unknown {
     throw new Error('Invalid K-JSON data');
   }
 }
-export function stringify(obj: unknown, limitingDraft: boolean = false): string {
+export function stringify(obj: object, limitingDraft: boolean = false): string {
   const saveList: unknown[] = [];
   const dataMap: unknown[] = [];
   function dfsTransform(obj: unknown): unknown {
