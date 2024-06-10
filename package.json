@@ -1,10 +1,10 @@
 {
-  "name": "assist-2024",
+  "name": "@kuankuan/assist-2024",
   "version": "1.0.0",
   "description": "The assist part of website-2024 and server-2024",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --fix",
+    "lint": "eslint src/**/* --fix",
     "test": "node commands/test.mjs"
   },
   "author": "kuankuan",
@@ -22,5 +22,9 @@
   },
   "files": [
     "src"
-  ],"type": "module"
+  ],
+  "type": "module",
+  "dependencies": {
+    "@kuankuan/eslint-2024": "^1.0.2"
+  }
 }

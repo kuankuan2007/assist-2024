@@ -104,7 +104,7 @@ export function parse(data: string): object {
   try {
     const dataList = JSON.parse(data);
     if (!Array.isArray(dataList)) {
-      throw new Error('Invalid K-JSON data');
+      return dataList;
     }
     dfsTransform(dataList, dataList);
     return dataList[0];
@@ -124,8 +124,8 @@ export function stringify(obj: object, limitingDraft: boolean = false): string {
     }
     return obj;
   }
-  dfsTransform(obj);
-  return JSON.stringify(saveList);
+  const result = dfsTransform(obj);
+  return saveList.length ? JSON.stringify(saveList) : JSON.stringify(result);
 }
 
 export default Object.freeze(
