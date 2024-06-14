@@ -72,7 +72,19 @@ const specialValues: {
     },
   },
 ];
-export function parse(data: string): object {
+export function parse(data: string): unknown {
+  
+  try {
+    const dataList = JSON.parse(data);
+    return structureKJSONList(dataList);
+  } catch {
+    throw new Error('Invalid K-JSON data');
+  }
+}
+export function structureKJSONList(data: unknown): unknown {
+  if (!Array.isArray(data)) {
+    return data;
+  }
   function dfsTransform(target: unknown, dataList: unknown[]): unknown {
     if (target instanceof Object) {
       for (const i in target) {
@@ -101,18 +113,13 @@ export function parse(data: string): object {
     }
     return target;
   }
-  try {
-    const dataList = JSON.parse(data);
-    if (!Array.isArray(dataList)) {
-      return dataList;
-    }
-    dfsTransform(dataList, dataList);
-    return dataList[0];
-  } catch {
-    throw new Error('Invalid K-JSON data');
-  }
+  dfsTransform(data, data);
+  return data[0];
 }
-export function stringify(obj: object, limitingDraft: boolean = false): string {
+export function stringify(obj: unknown, limitingDraft: boolean = false): string {
+  return JSON.stringify(normalizeToKJSONList(obj, limitingDraft));
+}
+export function normalizeToKJSONList(obj: unknown, limitingDraft: boolean = false){
   const saveList: unknown[] = [];
   const dataMap: unknown[] = [];
   function dfsTransform(obj: unknown): unknown {
@@ -125,13 +132,14 @@ export function stringify(obj: object, limitingDraft: boolean = false): string {
     return obj;
   }
   const result = dfsTransform(obj);
-  return saveList.length ? JSON.stringify(saveList) : JSON.stringify(result);
-}
-
+  return saveList.length ? saveList : result;
+};
 export default Object.freeze(
   Object.assign(Object.create(null), {
     parse,
     stringify,
+    structureKJSONList,
+    normalizeToKJSONList,
     toString: () => '[K-JSON object]',
   })
 );

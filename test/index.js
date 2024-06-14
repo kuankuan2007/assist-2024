@@ -203,6 +203,17 @@ var specialValues = [
   }
 ];
 function parse(data) {
+  try {
+    const dataList = JSON.parse(data);
+    return parseKJSONList(dataList);
+  } catch {
+    throw new Error("Invalid K-JSON data");
+  }
+}
+function parseKJSONList(data) {
+  if (!Array.isArray(data)) {
+    return data;
+  }
   function dfsTransform(target, dataList) {
     if (target instanceof Object) {
       for (const i in target) {
@@ -231,18 +242,13 @@ function parse(data) {
     }
     return target;
   }
-  try {
-    const dataList = JSON.parse(data);
-    if (!Array.isArray(dataList)) {
-      return dataList;
-    }
-    dfsTransform(dataList, dataList);
-    return dataList[0];
-  } catch {
-    throw new Error("Invalid K-JSON data");
-  }
+  dfsTransform(data, data);
+  return data[0];
 }
 function stringify(obj, limitingDraft = false) {
+  return JSON.stringify(normalizeToKJSONList(obj, limitingDraft));
+}
+function normalizeToKJSONList(obj, limitingDraft = false) {
   const saveList = [];
   const dataMap = [];
   function dfsTransform(obj2) {
@@ -255,7 +261,7 @@ function stringify(obj, limitingDraft = false) {
     return obj2;
   }
   const result = dfsTransform(obj);
-  return saveList.length ? JSON.stringify(saveList) : JSON.stringify(result);
+  return saveList.length ? saveList : result;
 }
 var KJSON_default = Object.freeze(
   Object.assign(/* @__PURE__ */ Object.create(null), {
@@ -268,11 +274,7 @@ var KJSON_default = Object.freeze(
 // test/index.ts
 var str = KJSON_default.stringify(1);
 console.log(str);
-console.log(
-  KJSON_default.parse(
-    `[{"data":"1::object"},{"email":"2163826131@qq.com::string","pwd":"ee17febe2de744f15b527c64830ad86a21b7d01bcde0b90b2028eeb91f037797d7e201dccd9815795ed22632893450c1623fd4bcdf633f30237b3249a476f7c9::string"}]`
-  )
-);
+console.log(KJSON_default.parse(str));
 setInterval(() => {
 }, 1e4);
 //# sourceMappingURL=index.js.map
