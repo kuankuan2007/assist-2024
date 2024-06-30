@@ -1,5 +1,8 @@
-import eslintKuankuanConfig from '@kuankuan/eslint-2024'
+import eslintKuankuanConfig from '@kuankuan/eslint-2024';
 
 export default [
-  ...await eslintKuankuanConfig.typescript
+  ...await eslintKuankuanConfig.typescript,
+  {
+    ignores: ['dist', 'test/dist'],
+  }
 ];

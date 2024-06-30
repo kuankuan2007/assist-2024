@@ -1,30 +1,31 @@
 {
   "name": "@kuankuan/assist-2024",
-  "version": "1.0.0",
-  "description": "The assist part of website-2024 and server-2024",
-  "main": "index.js",
+  "version": "2.0.1",
+  "description": "This module is an extension to the ECMAScript specification that provides additional functionality without relying on any runtime.",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src/**/* --fix",
-    "test": "node commands/test.mjs"
+    "test": "node command/test.mjs"
   },
   "author": "kuankuan",
-  "license": "MPL-2.0",
+  "license": "MulanPSL-2.0",
+  "types": "types/index.d.ts",
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.1",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mysql": "^2.15.26",
-    "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "@kuankuan/eslint-2024": "^1.0.3"
   },
   "files": [
-    "src"
+    "dist",
+    "types"
   ],
   "type": "module",
-  "dependencies": {
-    "@kuankuan/eslint-2024": "^1.0.2"
-  }
+  "dependencies": {},
+  "keywords": []
 }
