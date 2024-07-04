@@ -15,6 +15,11 @@ const specialValues: {
     replacer: (value) => new Date(Number(value)),
   },
   {
+    name: 'kdate',
+    matcher: (target) => (target instanceof KDate ? target.getTime().toString() : void 0),
+    replacer: (value) => new KDate(Number(value)),
+  },
+  {
     name: 'nan',
     matcher: (target) => (Number.isNaN(target as number) ? '' : void 0),
     replacer: () => NaN,
@@ -102,10 +107,10 @@ function structureKJSONList(data: unknown): unknown {
           }
         }
         if (!flag) {
-          console.warn('Invalid K-JSON data which has unknown type');
+          throw new Error('Invalid K-JSON data which has unknown type');
         }
       } else {
-        console.warn('Invalid K-JSON data which is string but could not be parsed');
+        throw new Error('Invalid K-JSON data which is string but could not be parsed');
       }
     }
     return target;
