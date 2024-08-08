@@ -9,6 +9,5 @@
 import './KJSON';
 import './ObjectControl';
 import './Other';
-import './KDate';
 
 export {};

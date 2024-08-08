@@ -99,10 +99,10 @@
             }
           }
           if (!flag) {
-            console.warn("Invalid K-JSON data which has unknown type");
+            throw new Error("Invalid K-JSON data which has unknown type");
           }
         } else {
-          console.warn("Invalid K-JSON data which is string but could not be parsed");
+          throw new Error("Invalid K-JSON data which is string but could not be parsed");
         }
       }
       return target;
@@ -289,8 +289,16 @@
   function clamp(min, value, max) {
     return Math.min(Math.max(min, value), max);
   }
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  function randomInt(min, max) {
+    return Math.floor(random(min, max + 1));
+  }
   var _KOther = {
-    clamp
+    clamp,
+    random,
+    randomInt
   };
   Object.defineProperty(globalThis, "KOther", { value: _KOther, writable: false, enumerable: false });
 })();

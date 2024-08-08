@@ -15,11 +15,6 @@ const specialValues: {
     replacer: (value) => new Date(Number(value)),
   },
   {
-    name: 'kdate',
-    matcher: (target) => (target instanceof KDate ? target.getTime().toString() : void 0),
-    replacer: (value) => new KDate(Number(value)),
-  },
-  {
     name: 'nan',
     matcher: (target) => (Number.isNaN(target as number) ? '' : void 0),
     replacer: () => NaN,

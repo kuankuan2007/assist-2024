@@ -1,11 +1,12 @@
 {
   "name": "@kuankuan/assist-2024",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "description": "This module is an extension to the ECMAScript specification that provides additional functionality without relying on any runtime.",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src/**/* --fix",
-    "test": "node command/test.mjs"
+    "test": "node command/test.mjs",
+    "build": "node command/build.mjs"
   },
   "author": "kuankuan",
   "license": "MulanPSL-2.0",
@@ -23,7 +24,8 @@
   },
   "files": [
     "dist",
-    "types"
+    "types",
+    "client.d.ts"
   ],
   "type": "module",
   "dependencies": {},
