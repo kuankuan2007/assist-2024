@@ -13,4 +13,5 @@ esbuild.buildSync({
   outfile: 'dist/index.js',
   bundle: true,
   sourcemap: true,
+  format: 'esm',
 });

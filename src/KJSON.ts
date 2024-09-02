@@ -20,6 +20,30 @@ const specialValues: {
     replacer: () => NaN,
   },
   {
+    name: 'binary',
+    matcher: (target) => {
+      if (typeof ArrayBuffer !== 'undefined' && target instanceof ArrayBuffer) {
+        return btoa(String.fromCharCode(...new Uint8Array(target)));
+      }
+      if (typeof Uint8Array !== 'undefined' && target instanceof Uint8Array) {
+        return btoa(String.fromCharCode(...target));
+      }
+      if (typeof Buffer !== 'undefined' && Buffer.isBuffer(target)) {
+        return target.toString('base64');
+      }
+    },
+    replacer: (value) => {
+      if (typeof ArrayBuffer !== 'undefined') {
+        return new Uint8Array(
+          atob(value)
+            .split('')
+            .map((c) => c.charCodeAt(0))
+        ).buffer;
+      }
+      throw new Error('ArrayBuffer is not supported');
+    },
+  },
+  {
     name: 'null',
     matcher: (target) => (target === null ? '' : void 0),
     replacer: () => null,
@@ -147,4 +171,4 @@ declare global {
   // eslint-disable-next-line no-var
   var KJSON: typeof _KJSON;
 }
-export {};
+export default _KJSON;

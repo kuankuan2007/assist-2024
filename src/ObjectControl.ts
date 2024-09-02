@@ -133,10 +133,10 @@ export {};
 globalThis.KObjectControl = _KObjectControl;
 Object.defineProperty(globalThis, 'KObjectControl', {
   enumerable: false,
-  writable: false,
   value: _KObjectControl,
 });
 declare global {
   // eslint-disable-next-line no-var
   var KObjectControl: typeof _KObjectControl;
 }
+export default _KObjectControl;

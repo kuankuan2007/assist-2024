@@ -9,11 +9,11 @@ declare const _KJSON: {
     readonly normalizeToKJSONList: typeof normalizeToKJSONList;
     readonly specialValues: {
         name: string;
-        matcher: (target: unknown, saveList: unknown[], dataMap: unknown[], dfsTransform: (obj: unknown) => unknown, limitingDraft: boolean) => string | undefined;
+        matcher: (target: unknown, saveList: unknown[], dataMap: unknown[], dfsTransform: (obj: unknown) => unknown, limitingDraft: boolean) => undefined | string;
         replacer: (value: string, saveList: unknown[]) => unknown;
     }[];
 };
 declare global {
     var KJSON: typeof _KJSON;
 }
-export {};
+export default _KJSON;

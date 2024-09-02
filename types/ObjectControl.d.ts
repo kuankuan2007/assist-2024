@@ -7,9 +7,10 @@ declare const _KObjectControl: {
     readonly clone: typeof clone;
     readonly getOwnProperties: typeof getOwnProperties;
     readonly specialObjectCompare: ((value1: unknown, value2: unknown) => boolean | null)[];
-    readonly specialObjectClone: ((value: unknown) => unknown)[];
+    readonly specialObjectClone: ((value: unknown) => unknown | null)[];
 };
 export {};
 declare global {
     var KObjectControl: typeof _KObjectControl;
 }
+export default _KObjectControl;
